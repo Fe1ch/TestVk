@@ -75,10 +75,19 @@ const enableValidation = () => {
   const selects = [formTowerSelect, formFloorSelect, formConferenceSelect, formInput].filter((element) => !element.value);
   if (selects.length) {
     selects.forEach((select) => {
+      select.addEventListener('change', (e) => {
+        e.target.classList.remove('error');
+      });
       select.classList.add('error');
-      formInput.classList.add('error');
     });
-    return false
+    formInput.addEventListener('input', (e) => {
+      if (e.target.value) {
+        e.target.classList.remove('error');
+      } else {
+        e.target.classList.add('error');
+      }
+    });
+    return false;
   } else {
     [formTowerSelect, formFloorSelect, formConferenceSelect, formInput].forEach((select) => {
       select.classList.remove('error');
