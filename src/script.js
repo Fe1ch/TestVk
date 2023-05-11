@@ -68,6 +68,9 @@ function handleFormSubmit(evt) {
 }
 
 function resetForm() {
+  [formTowerSelect, formFloorSelect, formConferenceSelect, formInput].forEach((select) => {
+    select.classList.remove('error');
+  })
   form.reset();
 }
 
@@ -80,22 +83,13 @@ const enableValidation = () => {
       });
       select.classList.add('error');
     });
-    formInput.addEventListener('input', (e) => {
-      if (e.target.value) {
-        e.target.classList.remove('error');
-      } else {
-        e.target.classList.add('error');
-      }
-    });
-    return false;
   } else {
     [formTowerSelect, formFloorSelect, formConferenceSelect, formInput].forEach((select) => {
       select.classList.remove('error');
-      formInput.classList.remove('error');
     })
-    return true
   }
+  return !Boolean(selects.length);
 }
-
+console.log(!true)
 form.addEventListener('submit', handleFormSubmit);
 buttonFormClear.addEventListener('click', resetForm)
